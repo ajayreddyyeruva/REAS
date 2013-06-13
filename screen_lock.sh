@@ -1,20 +1,26 @@
 #!/bin/bash
 
-
+CONTINUE_SNOOZE=1
 function snooze() {
-	SNOOZE_LIMIT_MIN=$1
-	zenity --question --text="Snooze for ${SNOOZE_LIMIT_MIN} minutes"
+	if [ ${CONTINUE_SNOOZE} = 1 ]; then
+		SNOOZE_LIMIT_MIN=$1
+		zenity --question --text="Snooze for ${SNOOZE_LIMIT_MIN} minutes"
 
-	SNOOZE=$?
+		SNOOZE=$?
 
-	if [ ${SNOOZE} = 0 ]; then
-		echo "User wants to snooze ${SNOOZE_LIMIT_MIN} minutes"
-		sleep $((${SNOOZE_LIMIT_MIN} * 60))
+		if [ ${SNOOZE} = 0 ]; then
+			echo "User wants to snooze ${SNOOZE_LIMIT_MIN} minutes"
+			sleep $((${SNOOZE_LIMIT_MIN} * 60))
+		else
+			echo "User doesn't wants to snooze"
+			CONTINUE_SNOOZE=0
+		fi
 	else
-		echo "User doesn't wants to snooze"
+		echo "User doesn't wants to continue with snooze"
 	fi
 
 }	
+	
 
 snooze 5
 snooze 4
