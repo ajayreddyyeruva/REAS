@@ -4,7 +4,7 @@ CONTINUE_SNOOZE=1
 function snooze() {
 	if [ ${CONTINUE_SNOOZE} = 1 ]; then
 		SNOOZE_LIMIT_MIN=$1
-		zenity --question --text="Snooze for ${SNOOZE_LIMIT_MIN} minutes"
+		DISPLAY=:0 zenity --question --text="Snooze for ${SNOOZE_LIMIT_MIN} minutes"
 
 		SNOOZE=$?
 
