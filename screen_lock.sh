@@ -1,4 +1,27 @@
 #!/bin/bash
+
+
+function snooze() {
+	SNOOZE_LIMIT_MIN=$1
+	zenity --question --text="Snooze for ${SNOOZE_LIMIT_MIN} minutes"
+
+	SNOOZE=$?
+
+	if [ ${SNOOZE} = 0 ]; then
+		echo "User wants to snooze ${SNOOZE_LIMIT_MIN} minutes"
+		sleep $((${SNOOZE_LIMIT_MIN} * 60))
+	else
+		echo "User doesn't wants to snooze"
+	fi
+
+}	
+
+snooze 5
+snooze 4
+snooze 3
+snooze 2
+snooze 1
+
 DISPLAY=:0 vlc --play-and-exit -f /home/user/Downloads/screen_lock.mp4
 
 SCREEN_SAVER_START_TIME=`date +"%s"`
